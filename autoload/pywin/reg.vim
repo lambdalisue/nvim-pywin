@@ -14,9 +14,10 @@ endfunction
 " Private -------------------------------------------------------------------
 function! s:on_exit(callback, job, msg, event) abort dict
   if a:msg != 0
-    return
+    call a:callback([])
+  else
+    call a:callback(s:parse_result(self.stdout))
   endif
-  call a:callback(s:parse_result(self.stdout))
 endfunction
 
 function! s:parse_result(result) abort
