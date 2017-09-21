@@ -1,9 +1,10 @@
-" The Python provider helper
+" " The Python provider helper
 if exists('s:loaded_pythonx_provider')
   finish
 endif
-
 let s:loaded_pythonx_provider = 1
+
+echomsg 'Patched version has loaded'
 
 let s:job_opts = {'rpc': v:true, 'on_stderr': function('provider#stderr_collector')}
 
@@ -12,7 +13,7 @@ function! provider#pythonx#Require(host) abort
 
   " Python host arguments
   let prog = (ver == '2' ?  provider#python#Prog() : provider#python3#Prog())
-  let args = [prog, '-c', '"import sys; sys.path.remove(""); import neovim; neovim.start_host()"']
+  let args = [prog, '-c', '"import sys; sys.path.remove(\"\"); import neovim; neovim.start_host()"']
 
   " Collect registered Python plugins into args
   let python_plugins = remote#host#PluginsForHost(a:host.name)
