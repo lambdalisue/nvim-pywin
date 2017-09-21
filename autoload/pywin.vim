@@ -47,45 +47,35 @@ endfunction
 
 function! s:assign_python_host_path() abort
   if g:pywin#prefer_local_machine
-    let g:python_host_path = empty(s:python_host_paths['HKLM'])
-          \ ? empty(s:python_host_paths['HKCU'])
-          \   ? get(g:, 'python_host_path', '')
-          \   : s:python_host_paths['HKCU'] . 'python.exe'
-          \ : s:python_host_paths['HKLM'] . 'python.exe'
+    let python_host_path = empty(s:python_host_paths['HKLM'])
+          \ ? s:python_host_paths['HKCU']
+          \ : s:python_host_paths['HKLM']
   else
-    let g:python_host_path = empty(s:python_host_paths['HKCU'])
-          \ ? empty(s:python_host_paths['HKLM'])
-          \   ? get(g:, 'python_host_path', '')
-          \   : s:python_host_paths['HKLM'] . 'python.exe'
-          \ : s:python_host_paths['HKCU'] . 'python.exe'
+    let python_host_path = empty(s:python_host_paths['HKCU'])
+          \ ? s:python_host_paths['HKLM']
+          \ : s:python_host_paths['HKCU']
   endif
-  if empty(g:python_host_path)
-    unlet g:python_host_path
-  else
-    call pywin#util#add_path(g:python_host_path)
-    call pywin#util#add_path(g:python_host_path . 'Scripts')
+  if !empty(python_host_path)
+    let g:python_host_prog = python_host_path . 'python.exe'
+    call pywin#util#add_path(python_host_path)
+    call pywin#util#add_path(python_host_path . 'Scripts')
   endif
 endfunction
 
 function! s:assign_python3_host_path() abort
   if g:pywin#prefer_local_machine
-    let g:python3_host_path = empty(s:python3_host_paths['HKLM'])
-          \ ? empty(s:python3_host_paths['HKCU'])
-          \   ? get(g:, 'python3_host_path', '')
-          \   : s:python3_host_paths['HKCU'] . 'python.exe'
-          \ : s:python3_host_paths['HKLM'] . 'python.exe'
+    let python3_host_path = empty(s:python3_host_paths['HKLM'])
+          \ ? s:python3_host_paths['HKCU']
+          \ : s:python3_host_paths['HKLM']
   else
-    let g:python3_host_path = empty(s:python3_host_paths['HKCU'])
-          \ ? empty(s:python3_host_paths['HKLM'])
-          \   ? get(g:, 'python3_host_path', '')
-          \   : s:python3_host_paths['HKLM'] . 'python.exe'
-          \ : s:python3_host_paths['HKCU'] . 'python.exe'
+    let python3_host_path = empty(s:python3_host_paths['HKCU'])
+          \ ? s:python3_host_paths['HKLM']
+          \ : s:python3_host_paths['HKCU']
   endif
-  if empty(g:python3_host_path)
-    unlet g:python3_host_path
-  else
-    call pywin#util#add_path(g:python3_host_path)
-    call pywin#util#add_path(g:python3_host_path . 'Scripts')
+  if !empty(python3_host_path)
+    let g:python3_host_prog = python3_host_path . 'python.exe'
+    call pywin#util#add_path(python3_host_path)
+    call pywin#util#add_path(python3_host_path . 'Scripts')
   endif
 endfunction
 
