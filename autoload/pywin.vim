@@ -50,14 +50,14 @@ function! s:assign_python_host_path() abort
     let g:python_host_path = empty(s:python_host_paths['HKLM'])
           \ ? empty(s:python_host_paths['HKCU'])
           \   ? get(g:, 'python_host_path', '')
-          \   : s:python_host_paths['HKCU']
-          \ : s:python_host_paths['HKLM']
+          \   : s:python_host_paths['HKCU'] . 'python.exe'
+          \ : s:python_host_paths['HKLM'] . 'python.exe'
   else
     let g:python_host_path = empty(s:python_host_paths['HKCU'])
           \ ? empty(s:python_host_paths['HKLM'])
           \   ? get(g:, 'python_host_path', '')
-          \   : s:python_host_paths['HKLM']
-          \ : s:python_host_paths['HKCU']
+          \   : s:python_host_paths['HKLM'] . 'python.exe'
+          \ : s:python_host_paths['HKCU'] . 'python.exe'
   endif
   if empty(g:python_host_path)
     unlet g:python_host_path
@@ -72,14 +72,14 @@ function! s:assign_python3_host_path() abort
     let g:python3_host_path = empty(s:python3_host_paths['HKLM'])
           \ ? empty(s:python3_host_paths['HKCU'])
           \   ? get(g:, 'python3_host_path', '')
-          \   : s:python3_host_paths['HKCU']
-          \ : s:python3_host_paths['HKLM']
+          \   : s:python3_host_paths['HKCU'] . 'python.exe'
+          \ : s:python3_host_paths['HKLM'] . 'python.exe'
   else
     let g:python3_host_path = empty(s:python3_host_paths['HKCU'])
           \ ? empty(s:python3_host_paths['HKLM'])
           \   ? get(g:, 'python3_host_path', '')
-          \   : s:python3_host_paths['HKLM']
-          \ : s:python3_host_paths['HKCU']
+          \   : s:python3_host_paths['HKLM'] . 'python.exe'
+          \ : s:python3_host_paths['HKCU'] . 'python.exe'
   endif
   if empty(g:python3_host_path)
     unlet g:python3_host_path
