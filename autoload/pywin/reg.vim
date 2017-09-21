@@ -24,7 +24,7 @@ function! s:parse_result(result) abort
   let pattern = join([
         \ '\%(^\|\r\n\)',
         \ '\%(HKEY_CURRENT_USER\|HKEY_LOCAL_MACHINE\)',
-        \ '\\Software\\Python\\PythonCore\\\([0-9.]\+\)\\InstallPath',
+        \ '\\Software\\Python\\PythonCore\\\(.\+\)\\InstallPath',
         \ '\r\n',
         \ '.\{-}REG_SZ\s\+\(.\{-}\)',
         \ '\%(\r\n\|$\)'
